@@ -29,4 +29,9 @@ class Student extends Model
         return $this->fname . ' ' . $this->lname;
     }
 
+    public function grades()
+    {
+        return $this->hasMany(SubjectGrade::class, 'student_id');
+    }
+
 }
