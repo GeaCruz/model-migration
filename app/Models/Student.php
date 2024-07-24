@@ -24,10 +24,20 @@ class Student extends Model
     ];
 
     protected $appends = ['fullname'];
+    //protected $appends = ['fullname', 'birthday', ];
+
     public function getFullnameAttribute()
     {
         return $this->fname . ' ' . $this->lname;
     }
+
+    // public function getBirthdayAttribute()
+    // {
+    //     $birthdate = $this->attributes['birthdate'];
+    //     if(birthdate){
+    //         return Carbon::parse($birthdate)->format('F d, Y');
+    //     }
+    // }
 
     public function grades()
     {
