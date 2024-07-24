@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 <body>
     <div>
@@ -24,26 +25,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $student)
+                            @foreach ($students as $students)
                             <tr>
-                                <td>{{ $students->Fullname}}</td>
-                                <td>{{ $students->Email}}</td>
-                                <td>{{ $students->Phone}}</td>
-                                <td>{{ $students->Address}}</td>
-                                <td>{{ $students->City}}</td>
-                                <td>{{ $students->Province}}</td>
-                                <td>{{ $students->Zip}}</td>
-                                <td>{{ $students->Birthdate}}</td>
+                                <td>{{ $students->fullname }}</td>
+                                <td>{{ $students->email }}</td>
+                                <td>{{ $students->phone }}</td>
+                                <td>{{ $students->address }}</td>
+                                <td>{{ $students->city }}</td>
+                                <td>{{ $students->province }}</td>
+                                <td>{{ $students->zip }}</td>
+                                <td>{{ $students->birthday }}</td>
                                 <td>
-                                    <a href="{{ url ('students', $students->id}}/edit" class="btn btn-outline-success btn-s"></a>
-                                <form action="{{ url('students', $student->id}}" method="post"> 
-                                    @method('delete')
+                                    <a href="{{ url ('students', $students->id)}}/edit" class="btn btn-outline-success btn-sm">Edit</a>
+                                <form action="{{ url('students', $students->id)}}" method="POST"> 
                                     @csrf
+                                    @method('delete')
                                     <button type="submit" class="btn btn-outline-danger btn-sm" onlick="return confirm('Are you sure you want to delete')">delete</button>
                                 </form>
                                 </td>
-                                @endforeach
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

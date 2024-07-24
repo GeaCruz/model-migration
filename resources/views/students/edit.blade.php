@@ -9,45 +9,49 @@
 <body>
     <div>
         <div class="container my-5">
+            <div class="d-flex justify-content-end">
+                <a href="{{ url('student')}}" class="btn btn=primary">student list</a>
+            </div>
             <div class="row">
                 <div class="col-md-6 mx-auto d-grid gap-2">
-                <form action="{{ url('students') }}" method="POST">
+                <form action="{{ url('students') $students->id }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group mb - 3">
             <label class="form-label">First Name</label>
-            <input type="text" name="fname" class="form-control"/>
+            <input type="text" name="fname" class="form-control" value="{{$students->fname}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Last Name</label>
-            <input type="text" name="fname" class="form-control"/>
+            <input type="text" name="fname" class="form-control" value="{{$students->lname}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Email</label>
-            <input type="text" name="email" class="form-control"/>
+            <input type="text" name="email" class="form-control" value="{{$students->email}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Phone Number</label>
-            <input type="text" name="phone number" class="form-control"/>
+            <input type="text" name="phone number" class="form-control" value="{{$students->phone number}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Address</label>
-            <input type="text" name="address" class="form-control"/>
+            <input type="text" name="address" class="form-control" value="{{$students->address}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">City</label>
-            <input type="text" name="city" class="form-control"/>
+            <input type="text" name="city" class="form-control" value="{{$students->city}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Province</label>
-            <input type="text" name="province" class="form-control"/>
+            <input type="text" name="province" class="form-control" value="{{$students->province}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Zip Code</label>
-            <input type="text" name="zip code" class="form-control"/>
+            <input type="text" name="zip code" class="form-control" value="{{$students->zip code}}">
         </div>
         <div class="form-group mb - 3">
             <label class="form-label">Birthday</label>
-            <input type="date" name="birthday" class="form-control"/>
+            <input type="date" name="birthday" class="form-control" value="{{$students->birthday}}">
         </div>
         <div class="form-group mb - 3">
             <button class="btn btn-primary">Save Changes</button>
@@ -57,7 +61,5 @@
             </div>
         </div>
     </div>
-
-    
 </body>
 </html>
