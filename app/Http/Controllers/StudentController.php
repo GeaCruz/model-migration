@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Models\SubjectGrade;
 use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
@@ -13,36 +13,41 @@ class StudentController extends Controller
      */
     public function index()
     {
-       $data['students'] = Student::all();
-       return view('students.index', $data);
-       
-        //return Student::all();
+        // return Student::all();
 
-       //return Student::where('province', 'New Jersey')->get();
+        $data['students'] = Student::all();
+        return view('students.index', $data);
 
-       //return Student::where('province', 'New Jersey')
-        //  ->Where('fname', 'Imogene')
-        //  ->get();
+        // $students = Student::all();
+        // return view('students.index', ['students' => $students]);
 
-        //return Student::where('province', 'New Jersey')
-        //  ->orWhere('province', 'New York')
-        //  ->orWhere('lname', 'Kunde')
-        //  ->get();
+        // return Student::where('province', 'Kansas')->get();
 
-        //return Student::where('fname', 'like', '%t%')->get();
+        // return Student::where('province', 'Hawaii')
+        //     ->where ('fname', 'Sigmund')
+        //     ->get();
 
-        //return Student::orderBy('fname')->get();
-        //return Student::orderBy('city', 'desc')->get();
+        // return Student::where('province', 'Hawaii')
+        // ->orwhere ('province', 'kansas')
+        // ->orwhere ('fname', 'Sigmund')
+        // ->get();
+
+        // return Student::where('province', 'like', '%T%')->get();
+
+        // return Student::orderBy('fname', 'desc')->get();
         
-        //return Student::limit(7)->get();
-        //return Student::whereNotIn('id', [1,3,5,7,9,11])->get();
-        //return Student::where('province', 'New York')->first();
+        // return Student::limit(4)->get();
+        // $data['students'] = Student::limit(4)->get();
+        // return view('students.index', $data);
+        // return Student::whereIn('id', [1,3,5,7,9,11,13])->get();
 
-        //return Student::with('grades')->get();
-        //return Student::with(['grades' => function($query){
-        //    return $query->where('grade', '>=', 90);
-        //}])->get();
+        // return Student::where('province', 'Virginia')->first();
 
+        // return Student::with('grades')->get();
+
+        // return student::with(['grades' => function($query){
+        //     return $query->where('grade', '>=', 97);
+        // }])->get();
     }
 
     /**
@@ -51,17 +56,6 @@ class StudentController extends Controller
     public function create()
     {
         return view('students.create');
-        $students = new Student();
-        $students->fname = $request['fname'];
-        $students->lname = $request['lname'];
-        $students->email = $request['email'];
-        $students->phone = $request['phone'];
-        $students->address = $request['address'];
-        $students->city = $request['city'];
-        $students->province = $request['province'];
-        $students->zip = $request['zip'];
-        $students->birthdate = $request['birthdate'];
-        $students->save();
     }
 
     /**
@@ -69,19 +63,32 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $students = new Student();
-        $students->fname = $request['fname'];
-        $students->lname = $request['lname'];
-        $students->email = $request['email'];
-        $students->phone = $request['phone'];
-        $students->address = $request['address'];
-        $students->city = $request['city'];
-        $students->province = $request['province'];
-        $students->zip = $request['zip'];
-        $students->birthdate = $request['birthdate'];
-        $students->save();
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'zip' => 'required',
+            'birthdate' => 'required|date',
+        ]);
 
-        return redirect()->to('students');
+        $student = new Student();
+        $student->fname = $request['fname'];
+        $student->lname = $request['lname'];
+        $student->email = $request['email'];
+        $student->phone = $request['phone'];
+        $student->address = $request['address'];
+        $student->city = $request['city'];
+        $student->province = $request['province'];
+        $student->zip = $request['zip'];
+        $student->birthdate = $request['birthdate'];
+        $student->save();
+
+        // return redirect()->back();
+        return back()->with('success', 'Data saved successfully');
     }
 
     /**
@@ -89,13 +96,16 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //return Student::find($id);
+        // return Student::find($id);
 
         // $student = Student::find($id);
-        //return $student->fname . ' ' .$student->lname;
+        // return $student->fname . '' . $student->lname;
 
-        $students = Student::find($id);
-        return $students->fullname;
+        $student = Student::find($id);
+        return $student->fullname;
+
+        // $student = Student::find($id);
+        // return $student->birthday;
     }
 
     /**
@@ -104,7 +114,7 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         $data['student'] = Student::find($id);
-        return view ('students.edit', $data);
+        return view('students.edit', $data);
     }
 
     /**
@@ -112,19 +122,23 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $students = Student::find($id);
-        $students->fname = $request['fname'];
-        $students->lname = $request['lname'];
-        $students->email = $request['email'];
-        $students->phone = $request['phone'];
-        $students->address = $request['address'];
-        $students->city = $request['city'];
-        $students->province = $request['province'];
-        $students->zip = $request['zip'];
-        $students->birthdate = $request['birthdate'];
-        $students->save();
+ 
+        
+        $student = Student::find($id);
+        $student->fname = $request['fname'];
+        $student->lname = $request['lname'];
+        $student->email = $request['email'];
+        $student->phone = $request['phone'];
+        $student->address = $request['address'];
+        $student->city = $request['city'];
+        $student->province = $request['province'];
+        $student->zip = $request['zip'];
+        $student->birthdate = $request['birthdate'];
+        $student->save();
 
         return redirect()->back();
+
+        
     }
 
     /**
@@ -132,9 +146,8 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        $students = Student::find($id);
-        $students->delete();
+        $student = Student::find($id);
+        $student->delete();
         return redirect()->to('students');
     }
-
 }

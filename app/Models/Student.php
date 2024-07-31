@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class Student extends Model
 {
     use HasFactory;
-
+    
     protected $table = "students";
     protected $fillable = [
         'fname',
@@ -22,11 +22,10 @@ class Student extends Model
         'province',
         'zip',
         'birthdate',
-
     ];
 
-    
-    protected $appends = ['fullname', 'birthday', ];
+    // protected $guarded = []
+    protected $appends = ['fullname', 'birthday'];
 
     public function getFullnameAttribute()
     {
@@ -34,17 +33,15 @@ class Student extends Model
     }
 
     public function getBirthdayAttribute()
-     {
-         $birthdate = $this->attributes['birthdate'];
-         if($birthdate){
-             return Carbon::parse($birthdate)->format('F d, Y');
-         }
-         return ' ';
-     }
+    {
+        $birthdate = $this->attributes['birthdate'];
+        if($birthdate){
+            return Carbon::parse($birthdate)->format('F d, Y');
+        }
+    }
 
     public function grades()
     {
         return $this->hasMany(SubjectGrade::class, 'student_id');
     }
-
 }

@@ -8,6 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class SubjectGrade extends Model
 {
     use HasFactory;
-    //protected $table = 'subject_grades';
-    //protected $guarded = [];
 }
